@@ -8,6 +8,9 @@
  */
 package bioinform.methods;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class InteractiveTextMethods {
 
    public static String getComplement(String dna) {
@@ -36,4 +39,40 @@ public class InteractiveTextMethods {
       return (new String(complementDNA)).toUpperCase();
    }
 
+   public static List<Integer> occurancesOfPattern(String pattern, String genome) {
+      int length = genome.length() - pattern.length();
+      if (length < 0)
+         return null;
+      if (length == 0) {
+         if (genome.equals(pattern)) {
+            List<Integer> occurancePositions = new ArrayList<Integer>();
+            occurancePositions.add(new Integer(0));
+            return occurancePositions;
+         }
+         else
+            return null;
+      }
+
+      List<Integer> occurancePositions = new ArrayList<Integer>();
+
+      int index = 0;
+
+      while (index <= length) {
+         int i = genome.indexOf(pattern, index);
+         if (i > -1) {
+            occurancePositions.add(new Integer(i));
+            if (i < length)
+               index = i + 1;
+            else
+               break;
+         }
+         else
+            break;
+      }
+      return occurancePositions;
+   }
+
+   public static List<String> test() {
+      return null;
+   }
 }
